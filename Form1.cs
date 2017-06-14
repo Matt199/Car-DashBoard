@@ -248,6 +248,7 @@ namespace AGaugeApp
             else if (e.Result.Text == "stop")
             {
 
+
                 if (trackBar1.Value == 0)
                 {
                     this.listBox1.Items.Add(">SpeechRecognitionEngine: ENGINE STOP!");
