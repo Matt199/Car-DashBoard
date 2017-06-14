@@ -1,6 +1,6 @@
 # Car-DashBoard
 
-## Schhol project of Car dashboard interface 
+## School project of Car dashboard interface 
 
 Need to Add:
 - [ ] Voice recognition
