@@ -50,6 +50,7 @@ namespace AGaugeApp
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -68,7 +69,8 @@ namespace AGaugeApp
             this.label7 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -1435,9 +1437,9 @@ namespace AGaugeApp
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(777, 32);
+            this.listBox1.Location = new System.Drawing.Point(737, 32);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 69);
+            this.listBox1.Size = new System.Drawing.Size(278, 69);
             this.listBox1.TabIndex = 21;
             // 
             // groupBox1
@@ -1454,6 +1456,16 @@ namespace AGaugeApp
             this.groupBox1.Size = new System.Drawing.Size(421, 288);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label11.Location = new System.Drawing.Point(164, 241);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(119, 33);
+            this.label11.TabIndex = 6;
+            this.label11.Text = "0 [km/h]";
             // 
             // pictureBox3
             // 
@@ -1507,6 +1519,8 @@ namespace AGaugeApp
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label8);
@@ -1743,15 +1757,25 @@ namespace AGaugeApp
             this.label3.TabIndex = 24;
             this.label3.Text = "Speed [Km/h]";
             // 
-            // label11
+            // label12
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label11.Location = new System.Drawing.Point(164, 241);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(119, 33);
-            this.label11.TabIndex = 6;
-            this.label11.Text = "0 [km/h]";
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label12.Location = new System.Drawing.Point(331, 180);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(166, 24);
+            this.label12.TabIndex = 28;
+            this.label12.Text = "ENGINE STATUS:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label13.Location = new System.Drawing.Point(509, 180);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(61, 24);
+            this.label13.TabIndex = 29;
+            this.label13.Text = "STOP";
             // 
             // Form1
             // 
@@ -1829,6 +1853,8 @@ namespace AGaugeApp
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
     }
 }
 

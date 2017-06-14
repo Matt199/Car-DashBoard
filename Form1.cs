@@ -19,9 +19,15 @@ namespace AGaugeApp
     // Declare delegate to store trackbar values 
     public delegate void delegateValue(TrackBar valueChanged);
 
+    
 
     public partial class Form1 : Form
     {
+
+        private bool engineStart = false;
+
+        private string engineText = "STOP";
+
         Timer t = new Timer();
         Random rnd = new Random();
 
@@ -35,7 +41,8 @@ namespace AGaugeApp
         {
             InitializeComponent();
             
-            
+
+
         }
 
         
@@ -77,8 +84,15 @@ namespace AGaugeApp
 
             aGauge1.Value = trackBar1.Value;
             aGauge2.Value = trackBar1.Value;
-            label11.Text = trackBar1.Value.ToString() + " [km/h]";
 
+            if (engineStart)
+            {
+                label11.Text = trackBar1.Value.ToString() + " [km/h]";
+            }
+            else if (!engineStart)
+            {
+                label11.Text ="0 [km/h]";
+            }
 
         }
 
@@ -172,9 +186,17 @@ namespace AGaugeApp
         {
             //Form2 app = new Form2();
 
-            delegateValue delegat = new delegateValue(form2.changeData);
-            delegat(this.trackBar1);
+            if (engineStart)
+            {
 
+                delegateValue delegat = new delegateValue(form2.changeData);
+                delegat(this.trackBar1);
+            }
+            else if (!engineStart) {
+
+                //
+
+            }
             
             
         }
@@ -186,11 +208,73 @@ namespace AGaugeApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            RecognizeSpeech();
             // Time interval 
             t.Interval = 1000;
             t.Tick += new EventHandler(this.timer_tick);
             t.Start();
+
+            
+
         }
+
+
+        // Speach Recognition 
+
+        static SpeechRecognitionEngine _recognizer = null;
+        SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer();
+        void RecognizeSpeech()
+        {
+            _recognizer = new SpeechRecognitionEngine();
+            _recognizer.LoadGrammar(new DictationGrammar());
+            _recognizer.LoadGrammar(new Grammar(new GrammarBuilder("activate")));
+            _recognizer.LoadGrammar(new Grammar(new GrammarBuilder("deactivate")));
+            _recognizer.SpeechRecognized += _recognizeSpeech_SpeechRecognized;
+            _recognizer.SpeechRecognitionRejected += _recognizeSpeech_SpeechRecognitionRejected;
+            _recognizer.SetInputToDefaultAudioDevice();
+            _recognizer.RecognizeAsync(RecognizeMode.Multiple);
+        }
+        void _recognizeSpeech_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        {
+            if (e.Result.Text == "start")
+            {
+                this.listBox1.Items.Add(">SpeechRecognitionEngine: ENGINE START!");
+                speechSynthesizer.Speak("Engine Start");
+                engineStart = true;
+                engineText = "START";
+                label13.Text = engineText;
+            }
+            else if (e.Result.Text == "stop")
+            {
+
+                if (trackBar1.Value == 0)
+                {
+                    this.listBox1.Items.Add(">SpeechRecognitionEngine: ENGINE STOP!");
+                    speechSynthesizer.Speak("Deactivating Engine");
+                    engineStart = false;
+                    engineText = "STOP";
+                    label13.Text = engineText;
+                }
+                else
+                {
+                    this.listBox1.Items.Add(">SpeechRecognitionEngine: YOU ARE STILL DRIVING!");
+                    speechSynthesizer.Speak("You must stop the car to deactivate engine");
+                }
+            }
+            else
+            {
+                this.listBox1.Items.Add(">SpeechRecognitionEngine: " + e.Result.Text);
+            }
+        }
+        void _recognizeSpeech_SpeechRecognitionRejected(object sender,
+        SpeechRecognitionRejectedEventArgs e)
+        {
+            this.listBox1.Items.Add(">SpeechRecognitionEngine: Unrecognized command...");
+        }
+
+
+
 
         // Handler 
 
@@ -291,6 +375,11 @@ namespace AGaugeApp
             {
                 pictureBox6.BackColor = Color.Red;
             }
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
